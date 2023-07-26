@@ -1,7 +1,8 @@
 import React from 'react';
 import { CSVLink } from 'react-csv';
-
+import { useTranslation } from 'react-i18next';
 const ExportCSV = ({ data }) => {
+  const { t } = useTranslation();
   const headers = [
     { label: 'Name', key: 'bookName' },
     { label: 'Author', key: 'author' },
@@ -32,7 +33,7 @@ const ExportCSV = ({ data }) => {
 
   return (
     <CSVLink data={csvData} headers={headers} filename={'books.csv'}>
-      Export to CSV
+      {t('Export to CSV')}
     </CSVLink>
   );
 };

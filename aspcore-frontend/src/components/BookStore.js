@@ -18,7 +18,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import NavbarMenu from "./NavbarMenu";
 import ExportCSV from "./ExportCSV";
+import { useTranslation } from 'react-i18next';
 const BookStore = () => {
+  const { t } = useTranslation();
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -227,20 +229,41 @@ const BookStore = () => {
     return `${day}/${month}/${year}`;
   };
 
+  // const filteredData = data.filter((item) => {
+  //   console.log("item", item);
+  //   return (
+  //     item.bookName.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.author.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.isbn.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.language.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.page.toString().includes(search) ||
+  //     item.publisher.toLowerCase().includes(search.toLowerCase()) ||
+  //     item.novel ||
+  //     item.poetry ||
+  //     item.biography
+  //   );
+  // });
   const filteredData = data.filter((item) => {
-    console.log("item", item);
-    return (
+    const includesSearch =
       item.bookName.toLowerCase().includes(search.toLowerCase()) ||
       item.author.toLowerCase().includes(search.toLowerCase()) ||
       item.isbn.toLowerCase().includes(search.toLowerCase()) ||
       item.language.toLowerCase().includes(search.toLowerCase()) ||
       item.page.toString().includes(search) ||
-      item.publisher.toLowerCase().includes(search.toLowerCase())
-    );
+      item.publisher.toLowerCase().includes(search.toLowerCase());
+  
+    const novelMatches = item.novel && search.toLowerCase().includes("novel");
+    const poetryMatches = item.poetry && search.toLowerCase().includes("poetry");
+    const biographyMatches = item.biography && search.toLowerCase().includes("biography");
+  
+    return includesSearch || novelMatches || poetryMatches || biographyMatches;
   });
+  
+  
+  
   return (
     <Fragment>
-      <NavbarMenu />
+      {/* <NavbarMenu /> */}
       <ToastContainer />
       <Container fluid="md">
         <Form.Control
@@ -304,14 +327,14 @@ const BookStore = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Author</th>
-            <th>ReleaseDate</th>
+            <th>{t('Name')}</th>
+            <th>{t('Author')}</th>
+            <th>{t('ReleaseDate')}</th>
             <th>ISBN</th>
-            <th>Language</th>
-            <th>Page</th>
-            <th>Publisher</th>
-            <th>Category</th>
+            <th>{t('Language')}</th>
+            <th>{t('Page')}</th>
+            <th>{t('Publisher')}</th>
+            <th>{t('Category')}</th>
           </tr>
         </thead>
         <tbody>
@@ -345,14 +368,14 @@ const BookStore = () => {
                         className="btn btn-primary"
                         onClick={() => handleEdit(item.id)}
                       >
-                        Edit
+                        {t('Edit')}
                       </button>{" "}
                       &nbsp;
                       <button
                         className="btn btn-danger"
                         onClick={() => handleDelete(item.id)}
                       >
-                        Delete
+                       {t('Delete')}
                       </button>
                     </td>
                   </tr>

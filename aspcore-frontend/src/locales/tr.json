@@ -1,0 +1,15 @@
+{
+    "Name": "Kitap İsmi",
+    "Author": "Yazar",
+    "ReleaseDate": "Yayın Tarihi",
+    "Isbn": "ISBN",
+    "Language": "Dil",
+    "Page": "Sayfa",
+    "Publisher": "Yayınevi",
+    "Category": "Kategori",
+    "Edit": "Düzenle",
+    "Delete": "Sil",
+    "Export to CSV":"CSV'ye aktar"
+  }
+  
+  

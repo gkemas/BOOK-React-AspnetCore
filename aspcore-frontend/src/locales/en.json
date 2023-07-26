@@ -1,0 +1,14 @@
+{
+    "Name": "Name",
+    "Author": "Author",
+    "ReleaseDate":"ReleaseDate",
+    "Isbn":"Isbn",
+    "Language":"Language",
+    "Page":"Page",
+    "Publisher":"Publisher",
+    "Category":"Category",
+    "Edit":"Edit",
+    "Delete":"Delete",
+    "Export to CSV":"Export to CSV"
+  }
+  
