@@ -80,8 +80,6 @@ const BookStore = () => {
     axios.get(`https://localhost:7202/api/Book/${id}`).then((result) => {
       setEditAuthor(result.data.author);
       setEditName(result.data.bookName);
-      // setEditReleaseDate(result.data.releaseDate);
-      // setEditReleaseDate(formatDate(result.data.releaseDate));
       setEditReleaseDate(new Date(result.data.releaseDate));
       console.log("editrelease:", editreleaseDate);
       console.log("data:", result.data);
@@ -181,9 +179,6 @@ const BookStore = () => {
       .get("https://localhost:7202/api/Book/GetBook")
       .then((result) => {
         setData(result.data);
-        // const releaseDateFromAPI = result.data[0].releaseDate;
-        // const dataObject = new Date(releaseDateFromAPI);
-        // setReleaseDate(dataObject);
         console.log(result.data);
         console.log("Setrelease", result.data.releaseDate);
       })
@@ -218,9 +213,6 @@ const BookStore = () => {
   const handleDateChange = (date) => {
     setReleaseDate(date);
   };
-  // const handleEditDateChange = (date) => {
-  //   setEditReleaseDate(date);
-  // };
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -228,21 +220,6 @@ const BookStore = () => {
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
-
-  // const filteredData = data.filter((item) => {
-  //   console.log("item", item);
-  //   return (
-  //     item.bookName.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.author.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.isbn.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.language.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.page.toString().includes(search) ||
-  //     item.publisher.toLowerCase().includes(search.toLowerCase()) ||
-  //     item.novel ||
-  //     item.poetry ||
-  //     item.biography
-  //   );
-  // });
   const filteredData = data.filter((item) => {
     const includesSearch =
       item.bookName.toLowerCase().includes(search.toLowerCase()) ||
@@ -263,7 +240,6 @@ const BookStore = () => {
   
   return (
     <Fragment>
-      {/* <NavbarMenu /> */}
       <ToastContainer />
       <Container fluid="md">
         <Form.Control
@@ -340,13 +316,6 @@ const BookStore = () => {
         <tbody>
           {data && data.length > 0
             ? filteredData.map((item, index) => {
-                // const formatDate = (dateString) => {
-                //   const date = new Date(dateString);
-                //   const day = date.getDate();
-                //   const month = date.getMonth() + 1;
-                //   const year = date.getFullYear();
-                //   return `${day}/${month}/${year}`;
-                // };
 
                 return (
                   <tr key={index}>
@@ -462,13 +431,7 @@ const BookStore = () => {
           </Row>
           <Row>
             <Col>
-              {/* <DatePicker
-                // selected={editreleaseDate}
-                selected={new Date(editreleaseDate)}
-                // onChange={handleEditDateChange}
-                dateFormat="dd/MM/yyyy"
-                placeholderText="Select a date"
-              /> */}
+
               <Form.Label>ReleaseDate:</Form.Label>
               <DatePicker
                 selected={editreleaseDate}
@@ -482,7 +445,6 @@ const BookStore = () => {
               <Form.Select
                 aria-label="Default select example"
                 onChange={handleEditSelectChange}
-                // value={editselectedCategory}
                 value={selectedCategoryValue}
               >
                 <option value="" disabled selected>
